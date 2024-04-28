@@ -8,7 +8,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 70vh;
+    height: 50vh;
     background-color: #F2EADC;
     overflow: hidden;
   
@@ -49,7 +49,6 @@ body{
      display: flex;
      padding: 0.25rem;
      border-radius: 50px;
-     background-color: #F5F3F1;
 }  
 .btn{  
      border: 0;  
