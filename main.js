@@ -1,51 +1,65 @@
-var gap = 20; // Define the gap size
-var btnArr = document.querySelectorAll(".btn");
-var contentArray = document.querySelectorAll(".content");
-var glider = document.querySelector(".glider");
+let gap = 20; // Define the gap size
+let btnArr = document.querySelectorAll(".btn");
+let contentArray = document.querySelectorAll(".content");
+let glider = document.querySelector(".glider");
 
+
+// ADDING EVENT LISTENER TO ALL THE TABS //
 btnArr.forEach(function (btn, index) {
   btn.addEventListener("click", function () {
     changeTab(index);
   });
 });
 
+
+/// ADDING AND REMOVING ACTIVE CLASS TO THE ACTIVE TAB ///
 function changeTab(index) {
-  // Adding and Removing Active Class
   btnArr.forEach(function (btn, i) {
     if (i === index) {
       btn.classList.add("active");
-    //   glider.style.transform = "translateX(" + (i) * 100 + "%)";
     } else {
       btn.classList.remove("active");
     }
   });
 
-   // Get the active tab button
-   var activeTabButton = btnArr[index];
 
-   // Get the position of the active tab button
-   var tabButtonRect = activeTabButton.getBoundingClientRect();
- 
-   // Calculate the position of the glider relative to the active tab button
-   var gliderLeft = tabButtonRect.left + (tabButtonRect.width - glider.offsetWidth) / 3;
- 
-   // Set the position of the glider
-   glider.style.left = gliderLeft + "px";
-   glider.style.width = tabButtonRect.width + 20 + "px"
-  var containerWidth = contentArray[0].parentNode.offsetWidth;
-  var activeDivWidth = contentArray[index].offsetWidth;
-  var centerOffset = (containerWidth - activeDivWidth) / 2;
+  /// THIS CODES IS SLIDING THE GLIDER ON THE TABS ///
 
-  // Slide
+  // Getting the active tab button
+  var activeTabButton = btnArr[index];
+
+  // Setting the width of the glider to match the width of the active tab
+  glider.style.width = activeTabButton.offsetWidth + gap + "px";
+
+
+  // Setting the position of the glider to the left point of the active tab
+  glider.style.left = activeTabButton.offsetLeft - (gap / 2) + "px";
+
+
+
+  /// THIS CODES IS HELPING THE SLIDER TO SLIDE ON THE RIGHT POSITION ///
+ 
+  // getting slider container width
+  let containerWidth = contentArray[0].parentNode.offsetWidth;
+
+  //getting active slider width
+  let activeDivWidth = contentArray[index].offsetWidth;
+
+  //calculating the center position of the slider
+  let centerOffset = (containerWidth - activeDivWidth) / 2;
+
+  // Sliding main func
   contentArray.forEach(function (content, i) {
-    var translate;
+    let translate;
 
     if (i === index) {
-      translate = `${centerOffset}px`; // Translate the current tab based on index and gap
+      // Translate the current slid based on index and gap
+      translate = `${centerOffset}px`;
     } else {
-      var translateValue = 0;
-      var startIdx, endIdx, direction;
+      let translateValue = 0;
+      let startIdx, endIdx, direction;
 
+      //if the slide is on the left of the active slide adding -1 
       if (i < index) {
         startIdx = i;
         endIdx = index - 1;
@@ -56,7 +70,8 @@ function changeTab(index) {
         direction = 1;
       }
 
-      for (var j = startIdx; j <= endIdx; j++) {
+      //getting translate value of the active slider
+      for (let j = startIdx; j <= endIdx; j++) {
         translateValue += contentArray[j].offsetWidth + centerOffset + gap; // Accumulate widths of previous or following content divs
       }
 
@@ -73,4 +88,5 @@ function changeTab(index) {
   });
 }
 
+//this is making the first tab as active slide
 changeTab(0);

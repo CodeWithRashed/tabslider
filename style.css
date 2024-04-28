@@ -43,7 +43,7 @@ body{
      display: flex; 
      justify-content: center;
      align-items: center;
-     gap: 20px; 
+     gap: 40px; 
      position: relative;
      z-index: 5;
      display: flex;
@@ -58,7 +58,6 @@ body{
      font-size: 2em;  
      color: #E82025;
      font-weight: 800;
-     border-radius: 20px;
      transition: all 0.5s;
 }  
 .content{  
@@ -114,9 +113,9 @@ body{
      color: #fff;  
      position: absolute;
      display: flex;
-     height: 44px;
+     height: 45px;
      z-index: 1;
-     border-radius: 80px;
+     border-radius: 10px;
      transition: 0.25s ease-out;
 
  }
